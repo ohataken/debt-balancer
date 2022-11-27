@@ -3,6 +3,8 @@ class Wallet {
   constructor(collection, el) {
     this.collection = collection;
     this.el = el;
+
+    this.render();
   }
 
   getInputValue() {
@@ -21,7 +23,15 @@ class Wallet {
     const per = Math.round(sum / this.collection.getNumber());
     const del = this.getInputValue() - per;
 
-    this.el.querySelector("#result").innerHTML = del;
+    if (0 === del) {
+      this.el.querySelector("#result").innerHTML = `it's done !`;
+    } else if (0 < del) {
+      this.el.querySelector("#result").innerHTML = `and pays more ${del}.`;
+    } else if (del < 0) {
+      this.el.querySelector("#result").innerHTML = `and gets ${del}.`;
+    } else {
+      this.el.querySelector("#result").innerHTML = `calculating`;
+    }
   }
 
 }
